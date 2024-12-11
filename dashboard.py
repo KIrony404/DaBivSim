@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import psycopg2
+import plotly.express as px
 
 # Datenbankverbindung
 DB_HOST = "10.154.4.40"  # Ersetzen durch Ihre Datenbankadresse
@@ -69,13 +70,21 @@ def main_app():
             filtered_data = data[(data['timestamp'] >= start_datetime) & (data['timestamp'] <= end_datetime)]
             
             if not filtered_data.empty:
-                # Temperatur-Plot
+                # Interaktiver Temperatur-Plot mit Plotly
                 st.subheader("Temperaturverlauf")
-                st.line_chart(filtered_data[['timestamp', 'temperature']].set_index('timestamp'))
+                fig_temp = px.line(filtered_data, x='timestamp', y='temperature', title='Temperaturverlauf', labels={
+                    "timestamp": "Zeitstempel",
+                    "temperature": "Temperatur (°C)"
+                })
+                st.plotly_chart(fig_temp, use_container_width=True)
                 
-                # Feuchtigkeit-Plot
+                # Interaktiver Feuchtigkeits-Plot mit Plotly
                 st.subheader("Feuchtigkeitsverlauf")
-                st.line_chart(filtered_data[['timestamp', 'humidity']].set_index('timestamp'))
+                fig_humidity = px.line(filtered_data, x='timestamp', y='humidity', title='Feuchtigkeitsverlauf', labels={
+                    "timestamp": "Zeitstempel",
+                    "humidity": "Feuchtigkeit (%)"
+                })
+                st.plotly_chart(fig_humidity, use_container_width=True)
                 
                 # Datenanzeige
                 st.subheader("Gefilterte Daten")
