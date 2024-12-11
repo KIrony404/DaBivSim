@@ -2,13 +2,12 @@ import streamlit as st
 import pandas as pd
 import psycopg2
 
-# Datenbankverbindungsdetails
-DB_HOST = "10.154.4.40" # Ersetzen durch Ihre Datenbankadresse
-DB_PORT = "8082"
-DB_NAME = "sudhaus_db"
-DB_USER = "postgres"
-DB_PASSWORD = "postgres"
-
+# Datenbankverbindung
+DB_HOST = "10.154.4.40"  # Ersetzen durch Ihre Datenbankadresse
+DB_PORT = "8082"  # Portnummer
+DB_NAME = "sudhaus_db"  # Name der Datenbank
+DB_USER = "postgres"  # Benutzername
+DB_PASSWORD = "postgres"  # Passwort
 
 # Benutzername und Passwort für die App
 APP_USERNAME = "user"
@@ -59,9 +58,15 @@ def main_app():
         st.sidebar.header("Zeitraumfilter")
         start_date = st.sidebar.date_input("Startdatum", value=data['timestamp'].min().date())
         end_date = st.sidebar.date_input("Enddatum", value=data['timestamp'].max().date())
+        start_time = st.sidebar.time_input("Startzeit", value=pd.Timestamp("00:00:00").time())
+        end_time = st.sidebar.time_input("Endzeit", value=pd.Timestamp("23:59:59").time())
         
         if start_date <= end_date:
-            filtered_data = data[(data['timestamp'].dt.date >= start_date) & (data['timestamp'].dt.date <= end_date)]
+            # Zeitbereich erstellen
+            start_datetime = pd.Timestamp.combine(start_date, start_time)
+            end_datetime = pd.Timestamp.combine(end_date, end_time)
+            
+            filtered_data = data[(data['timestamp'] >= start_datetime) & (data['timestamp'] <= end_datetime)]
             
             if not filtered_data.empty:
                 # Temperatur-Plot
