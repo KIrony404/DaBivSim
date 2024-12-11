@@ -13,6 +13,10 @@ DB_NAME = "sudhaus_db"  # Name der Datenbank
 DB_USER = "postgres"  # Benutzername
 DB_PASSWORD = "postgres"  # Passwort
 
+# Benutzername und Passwort für die App
+APP_USERNAME = "user"
+APP_PASSWORD = "password"
+
 # Funktion zur Datenabfrage aus der Datenbank
 def fetch_data():
     try:
