@@ -1,10 +1,6 @@
-# Installation notwendiger Bibliotheken
-# !pip install streamlit pandas psycopg2 matplotlib
-
 import streamlit as st
 import pandas as pd
 import psycopg2
-import matplotlib.pyplot as plt
 
 # Datenbankverbindung
 DB_HOST = "10.154.4.40"  # Ersetzen durch Ihre Datenbankadresse
@@ -47,10 +43,10 @@ def login():
         else:
             st.error("Falscher Benutzername oder Passwort.")
 
-# Streamlit Layout
+# Hauptanwendung
 def main_app():
     st.title("Sensordaten-Dashboard")
-
+    
     # Daten laden
     data = fetch_data()
 
@@ -84,7 +80,6 @@ def main_app():
             st.error("Das Startdatum muss vor dem Enddatum liegen.")
     else:
         st.warning("Keine Daten gefunden.")
-
 
 # Authentifizierungskontrolle
 if "logged_in" not in st.session_state:
