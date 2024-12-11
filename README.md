@@ -9,7 +9,7 @@ Je nach Verfügbarkeit:
 
 Der Subscription-Thread ist für 120s offen und liefert jeweils 50 Messpunkte für Feuchte [%] und Temperatur[°C].
 
-Die Daten werden in einen Postgres-Datenbankserver geschrieben, der on prem an der HSWT gehostet ist. Erreichbarkeit wird übereinen VPN-Tunnel gewährleistet.
+Die Daten werden in einen Postgres-Datenbankserver geschrieben, der on prem an der HSWT gehostet ist. Erreichbarkeit und Sicherheit wird übereinen VPN-Tunnel sowie Login-Credentials gewährleistet.
 
 Das Dashboard greift die Daten vom Datenbankserver ab und visualisiert sie mittels streamlit app. Eine leichte Erhöhung der Interaktivität wurde durch das Einbetten von plotly-Diagrammen erreicht.
 Aufruf der app erfolgt via bash (cmd):
