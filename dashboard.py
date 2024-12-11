@@ -48,7 +48,7 @@ def login():
             st.error("Falscher Benutzername oder Passwort.")
 
 # Streamlit Layout
-def main_app()
+def main_app():
     st.title("Sensordaten-Dashboard")
 
     # Daten laden
