@@ -194,64 +194,6 @@ DB_USER = "postgres"
 DB_PASSWORD = "postgres"
 
 
-def fetch_data_from_database():
-    try:
-        # Verbindung zur Datenbank herstellen
-        conn = psycopg2.connect(
-            host=DB_HOST,
-            port=DB_PORT,
-            dbname=DB_NAME,
-            user=DB_USER,
-            password=DB_PASSWORD
-        )
-        # SQL-Befehl zum Abrufen der Daten
-        query = "SELECT timestamp, temperature, humidity FROM sensor_data ORDER BY timestamp ASC;"
-        # Daten in ein Pandas-DataFrame laden
-        data = pd.read_sql_query(query, conn)
-
-        # Verbindung schließen
-        conn.close()
-        return data
-    except Exception as e:
-        print(f"Error fetching data from database: {e}")
-        return pd.DataFrame()  # Leeres DataFrame bei Fehler
-
-# Daten aus der Datenbank abrufen
-data = fetch_data_from_database()
-
-# Überprüfen, ob Daten geladen wurden
-if not data.empty:
-    # Zeitstempel in Pandas-Format konvertieren
-    data['timestamp'] = pd.to_datetime(data['timestamp'])
-
-    # Temperatur visualisieren
-    plt.figure(figsize=(10, 5))
-    plt.plot(data['timestamp'], data['temperature'], marker='o', label="Temperature (°C)")
-    plt.xlabel("Timestamp")
-    plt.ylabel("Temperature (°C)")
-    plt.title("Temperature Data from Database")
-    plt.grid(True)
-    plt.legend()
-    plt.show()
-
-    # Luftfeuchtigkeit visualisieren
-    plt.figure(figsize=(10, 5))
-    plt.plot(data['timestamp'], data['humidity'], marker='o', color="orange", label="Humidity (%)")
-    plt.xlabel("Timestamp")
-    plt.ylabel("Humidity (%)")
-    plt.title("Humidity Data from Database")
-    plt.grid(True)
-    plt.legend()
-    plt.show()
-else:
-    print("No data found in the database.")
-# Datenbankverbindung
-DB_HOST = "10.154.4.40"  # Ersetzen durch Ihre Datenbankadresse
-DB_PORT = "8082"  # Portnummer
-DB_NAME = "sudhaus_db"  # Name der Datenbank
-DB_USER = "postgres"  # Benutzername
-DB_PASSWORD = "postgres"  # Passwort
-
 # Benutzername und Passwort für die App
 APP_USERNAME = "user"
 APP_PASSWORD = "password"
