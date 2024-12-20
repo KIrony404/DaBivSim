@@ -12,7 +12,7 @@ DB_PASSWORD = "postgres"  # Passwort
 
 # Benutzername und Passwort für die App
 APP_USERNAME = "user"
-APP_PASSWORD = "password"
+APP_PASSWORD = "password" #xyzfhjklj
 
 # Funktion zur Datenabfrage aus der Datenbank
 def fetch_data():
