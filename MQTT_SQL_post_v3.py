@@ -6,7 +6,7 @@ import time
 import threading
 import pandas as pd
 import matplotlib.pyplot as plt
-from datetime import datetime
+from datetime import datetime # xyx
 
 # Test für Schreibrechte im aktuellen Pfad
 try:
